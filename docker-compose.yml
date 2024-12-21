@@ -1,0 +1,31 @@
+version: "3.8"
+
+services:
+  postgres:
+    container_name: postgres
+    image: postgres:17
+    restart: always
+    ports:
+      - "${POSTGRES_PORT}:${POSTGRES_PORT}"
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      TZ: ${POSTGRES_TZ}
+
+  spring-app:
+    container_name: forms-app
+    image: forms:0.1
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "${VITE_APP_PORT}:${VITE_APP_PORT}"
+    depends_on:
+      - postgres
+    environment:
+      # Appear earlier and override application.properties
+      SPRING_APPLICATION_NAME: ${APP_NAME}
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:${POSTGRES_PORT}/${POSTGRES_DB}
+      SPRING_DATASOURCE_USERNAME: ${POSTGRES_USER}
+      SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD}

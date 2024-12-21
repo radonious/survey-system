@@ -1,0 +1,5 @@
+id,username,password,role,refresh_token
+1,user1,$2a$10$nKWUAXVVwn6Z9aWucJu1XuVF.iWvwHMKKZi6rSkwm.th9ZMHUayC2,USER,
+2,creator1,$2a$10$nKWUAXVVwn6Z9aWucJu1XuVF.iWvwHMKKZi6rSkwm.th9ZMHUayC2,CREATOR,
+3,user2,$2a$10$nKWUAXVVwn6Z9aWucJu1XuVF.iWvwHMKKZi6rSkwm.th9ZMHUayC2,USER,
+4,user3,$2a$10$nKWUAXVVwn6Z9aWucJu1XuVF.iWvwHMKKZi6rSkwm.th9ZMHUayC2,USER,

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="create-questions-table" author="matthew">
+        <createTable tableName="questions">
+            <column name="id" type="INT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="form_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="text" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="type" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="image_url" type="VARCHAR(255)"/>
+        </createTable>
+
+        <addForeignKeyConstraint
+                baseTableName="questions"
+                baseColumnNames="form_id"
+                constraintName="fk_question_form"
+                referencedTableName="form"
+                referencedColumnNames="id"
+                onDelete="CASCADE"/>
+    </changeSet>
+
+    <changeSet id="insert-questions-1" author="matthew">
+        <insert tableName="questions">
+            <column name="form_id" valueComputed="(SELECT id FROM form WHERE title = 'Первая форма')"/>
+            <column name="text" value="Какой твой возраст"/>
+            <column name="type" value="NUMERIC"/>
+        </insert>
+        <insert tableName="questions">
+            <column name="form_id" valueComputed="(SELECT id FROM form WHERE title = 'Первая форма')"/>
+            <column name="text" value="Твой любимый цвет"/>
+            <column name="type" value="SINGLE_CHOICE"/>
+        </insert>
+        <insert tableName="questions">
+            <column name="form_id" valueComputed="(SELECT id FROM form WHERE title = 'Первая форма')"/>
+            <column name="text" value="Выбери свои хобби"/>
+            <column name="type" value="MULTIPLE_CHOICE"/>
+        </insert>
+        <insert tableName="questions">
+            <column name="form_id" valueComputed="(SELECT id FROM form WHERE title = 'Первая форма')"/>
+            <column name="text" value="Напиши о себе"/>
+            <column name="type" value="TEXT"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="insert-questions-2" author="alexey">
+        <insert tableName="questions">
+            <column name="form_id" valueComputed="(SELECT id FROM form WHERE title = 'Первая форма')"/>
+            <column name="text" value="Твоё любимое число"/>
+            <column name="type" value="NUMERIC"/>
+        </insert>
+        <insert tableName="questions">
+            <column name="form_id" valueComputed="(SELECT id FROM form WHERE title = 'Первая форма')"/>
+            <column name="text" value="Выбери любимую команду"/>
+            <column name="type" value="SINGLE_CHOICE"/>
+        </insert>
+        <insert tableName="questions">
+            <column name="form_id" valueComputed="(SELECT id FROM form WHERE title = 'Первая форма')"/>
+            <column name="text" value="Выбери любимые предметы"/>
+            <column name="type" value="MULTIPLE_CHOICE"/>
+        </insert>
+        <insert tableName="questions">
+            <column name="form_id" valueComputed="(SELECT id FROM form WHERE title = 'Первая форма')"/>
+            <column name="text" value="Напиши что ты думаешь об этом опросе"/>
+            <column name="type" value="TEXT"/>
+        </insert>
+    </changeSet>
+
+</databaseChangeLog>

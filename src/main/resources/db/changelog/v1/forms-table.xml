@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="create-form-table" author="matthew">
+        <createTable tableName="form">
+            <column name="id" type="INT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="creator_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="title" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="description" type="TEXT"/>
+        </createTable>
+
+        <addForeignKeyConstraint
+                baseTableName="form"
+                baseColumnNames="creator_id"
+                constraintName="fk_form_creator"
+                referencedTableName="users"
+                referencedColumnNames="id"
+                onDelete="CASCADE"/>
+    </changeSet>
+
+    <changeSet id="insert-form" author="matthew">
+        <insert tableName="form">
+            <column name="creator_id" valueComputed="(SELECT id FROM users WHERE username = 'creator')"/>
+            <column name="title" value="Первая форма"/>
+            <column name="description" value="Это наша первая форма"/>
+        </insert>
+    </changeSet>
+
+</databaseChangeLog>

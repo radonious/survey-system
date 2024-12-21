@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="create-options-table" author="matthew">
+        <createTable tableName="options">
+            <column name="id" type="INT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="question_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="text" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addForeignKeyConstraint
+                baseTableName="options"
+                baseColumnNames="question_id"
+                constraintName="fk_option_question"
+                referencedTableName="questions"
+                referencedColumnNames="id"
+                onDelete="CASCADE"/>
+    </changeSet>
+
+    <changeSet id="insert-options-1" author="matthew">
+        <insert tableName="options">
+            <column name="question_id" valueComputed="(SELECT id FROM questions WHERE text = 'Твой любимый цвет')"/>
+            <column name="text" value="Красный"/>
+        </insert>
+        <insert tableName="options">
+            <column name="question_id" valueComputed="(SELECT id FROM questions WHERE text = 'Твой любимый цвет')"/>
+            <column name="text" value="Голубой"/>
+        </insert>
+        <insert tableName="options">
+            <column name="question_id" valueComputed="(SELECT id FROM questions WHERE text = 'Твой любимый цвет')"/>
+            <column name="text" value="Зеленый"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="insert-options-multiple-choice-1" author="matthew">
+        <insert tableName="options">
+            <column name="question_id" valueComputed="(SELECT id FROM questions WHERE text = 'Выбери свои хобби')"/>
+            <column name="text" value="Чтение"/>
+        </insert>
+        <insert tableName="options">
+            <column name="question_id" valueComputed="(SELECT id FROM questions WHERE text = 'Выбери свои хобби')"/>
+            <column name="text" value="Спорт"/>
+        </insert>
+        <insert tableName="options">
+            <column name="question_id" valueComputed="(SELECT id FROM questions WHERE text = 'Выбери свои хобби')"/>
+            <column name="text" value="Путешествия"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="insert-options-2" author="matthew">
+        <insert tableName="options">
+            <column name="question_id"
+                    valueComputed="(SELECT id FROM questions WHERE text = 'Выбери любимую команду')"/>
+            <column name="text" value="Зенит"/>
+        </insert>
+        <insert tableName="options">
+            <column name="question_id"
+                    valueComputed="(SELECT id FROM questions WHERE text = 'Выбери любимую команду')"/>
+            <column name="text" value="Краснодар"/>
+        </insert>
+        <insert tableName="options">
+            <column name="question_id"
+                    valueComputed="(SELECT id FROM questions WHERE text = 'Выбери любимую команду')"/>
+            <column name="text" value="Динамо Москва"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="insert-options-multiple-choice-2" author="matthew">
+        <insert tableName="options">
+            <column name="question_id"
+                    valueComputed="(SELECT id FROM questions WHERE text = 'Выбери любимые предметы')"/>
+            <column name="text" value="Математика"/>
+        </insert>
+        <insert tableName="options">
+            <column name="question_id"
+                    valueComputed="(SELECT id FROM questions WHERE text = 'Выбери любимые предметы')"/>
+            <column name="text" value="Физика"/>
+        </insert>
+        <insert tableName="options">
+            <column name="question_id"
+                    valueComputed="(SELECT id FROM questions WHERE text = 'Выбери любимые предметы')"/>
+            <column name="text" value="Литература"/>
+        </insert>
+    </changeSet>
+
+</databaseChangeLog>

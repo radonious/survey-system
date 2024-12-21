@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="create-users-table" author="matthew">
+        <createTable tableName="users">
+            <column name="id" type="INT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="username" type="VARCHAR(255)">
+                <constraints unique="true" nullable="false"/>
+            </column>
+            <column name="password" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="role" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="refresh_token" type="VARCHAR(255)">
+                <constraints nullable="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="insert-users" author="matthew">
+        <insert tableName="users">
+            <column name="username" value="creator"/>
+            <column name="password" value="$2a$10$8FDoQpFDLu6zIHYlL1J3deaMXdC73XaGXVC1ULBq9MkX2GXii8R3u"/>
+            <column name="role" value="CREATOR"/>
+        </insert>
+    </changeSet>
+    <changeSet id="update-sequence-after-insert" author="matthew">
+        <sql>
+            SELECT setval('users_id_seq', (SELECT MAX(id) FROM users));
+        </sql>
+    </changeSet>
+</databaseChangeLog>

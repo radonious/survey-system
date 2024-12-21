@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="create-answers-options-table" author="alex">
+        <createTable tableName="answers_options">
+            <column name="answer_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="option_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addForeignKeyConstraint
+                baseTableName="answers_options"
+                baseColumnNames="answer_id"
+                constraintName="fk_answers_options_1"
+                referencedTableName="answers"
+                referencedColumnNames="id"
+                onDelete="CASCADE"/>
+
+        <addForeignKeyConstraint
+                baseTableName="answers_options"
+                baseColumnNames="option_id"
+                constraintName="fk_answers_options_2"
+                referencedTableName="options"
+                referencedColumnNames="id"
+                onDelete="CASCADE"/>
+    </changeSet>
+
+    <changeSet id="add-position-column" author="matthew">
+        <addColumn tableName="answers_options">
+            <column name="position" type="int"/>
+        </addColumn>
+    </changeSet>
+
+</databaseChangeLog>
