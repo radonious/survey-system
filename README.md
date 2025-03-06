@@ -73,8 +73,6 @@
 ```bash
 # 0. Clone
 git clone <this repository>
-cd 2024-6-eltex-forms
-git checkout master
 
 # 1. Set Up .env
 cp .env.example .env

@@ -6,7 +6,7 @@ plugins {
     id("io.spring.dependency-management") version "1.1.6"
 }
 
-group = "edu.eltex"
+group = "edu"
 version = "0.1"
 
 java {

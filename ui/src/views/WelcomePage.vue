@@ -4,7 +4,7 @@
         <div class="col-md-6">
           <div class="card">
             <div class="card-header">
-              <h3 class="text-center">Добро пожаловать на Eltex-forms</h3>
+              <h3 class="text-center">Добро пожаловать на Forms</h3>
             </div>
             <div class="card-body">
               <p class="text-center">Пожалуйста, войдите или зарегистрируйтесь, чтобы продолжить.</p>
